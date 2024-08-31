@@ -1,0 +1,64 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.env
+venv/
+.env
+
+# Scala
+target/
+*.class
+.project
+*.log
+.meteor/
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+target/
+bin/
+
+# Docker
+*.log
+docker-compose.override.yml
+
+# Kubernetes
+*.yaml
+
+# Maven
+log/
+target/
+pom.xml.versionsBackup
+
+# SBT
+lib_managed/
+src_managed/
+.project
+.cache
+.history
+dist/
+target/
+boot/
+lib/
+
+# Configuration files
+configs/*.yaml
+configs/*.json
+
+# Logs and databases
+logs/
+*.log
+*.db
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# VS Code
+.vscode/
+
+# System files
+.DS_Store
+Thumbs.db
