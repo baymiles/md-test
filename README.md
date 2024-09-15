@@ -1,253 +1,136 @@
-# Netflix Clone Project
+# Anomaly Detection in Time-Series Data
 
 ## Overview
 
-This project is a Netflix clone designed to replicate the core functionalities of Netflix, including user management, video streaming, recommendations, analytics, and transcoding. The system is built using a microservices architecture, with each service implemented in a language that best suits its role, ensuring scalability, maintainability, and performance. 
+This project is an Anomaly Detection in Time-Series Data system designed to identify unusual patterns in time-series data using both traditional and advanced machine learning models. The project leverages the strengths of Python for model development, deployment, and deep learning, while R is utilized for statistical analysis, advanced preprocessing, and visualization. The architecture is modular, allowing easy customization and extension, making it suitable for a variety of anomaly detection tasks across different domains.
 
-The backend services are distributed across multiple languages: Kotlin for user services, Java for video services, Python for recommendations, Scala for analytics, and Go for transcoding. The frontend is developed using React, with mobile applications available for Android (Kotlin) and iOS (Swift). The project also includes DevOps configurations for continuous integration and deployment.
+The system is designed to handle large-scale data efficiently, with support for both supervised and unsupervised anomaly detection techniques. It also includes a robust deployment pipeline and monitoring tools to ensure models perform optimally in production.
 
 ## Features
 
-- **User Service (Kotlin with Spring Boot)**:
-  - Handles user registration, authentication, and profile management.
-  - REST API for user operations.
-  - Integrated with a relational database for persistent storage.
+- **Data Management**:
+  - Structured directories for raw, processed, and feature-engineered time-series data.
+  - Python scripts for data preprocessing, handling missing values, and feature engineering (e.g., rolling statistics, Fourier transforms).
+  - R scripts for specific statistical preprocessing tasks, such as advanced normalization and imputation, as well as exploratory data analysis (EDA) using R Markdown.
 
-- **Video Service (Java with Spring Boot)**:
-  - Manages video content, including uploading, metadata, and streaming.
-  - REST API for video operations.
-  - Integrated with a scalable video storage solution.
+- **Model Development**:
+  - Python implementations of traditional statistical models (e.g., ARIMA) and machine learning models (e.g., Random Forest, Isolation Forest).
+  - Deep learning models tailored for time-series anomaly detection, including LSTM and Autoencoders, implemented in Python.
+  - R implementations of advanced statistical models (e.g., SARIMA) using R’s `forecast` package.
+  - Ensemble models combining multiple approaches to improve detection accuracy.
 
-- **Recommendation Service (Python with Flask)**:
-  - Provides personalized video recommendations based on user behavior.
-  - REST API for fetching recommendations.
-  - Utilizes machine learning models for prediction.
+- **Experimentation and Hyperparameter Tuning**:
+  - Configurable experiment setup with Python scripts to manage different configurations, run experiments, and log results.
+  - R scripts for statistical experiments and hyperparameter tuning, using packages like `caret` and `mlr3` for comprehensive analysis.
 
-- **Analytics Service (Scala with Akka HTTP)**:
-  - Collects and processes user interaction data for insights and reporting.
-  - Real-time analytics on user behavior and video performance.
-  - REST API for analytics data retrieval.
+- **Deployment**:
+  - Dockerized deployment environment supporting both Python and R, ensuring consistency across different platforms.
+  - Python-based REST API for serving models in production, with an R-based API option for models implemented in R.
+  - Cloud deployment scripts for AWS and GCP, with configurations tailored to the needs of both Python and R environments.
 
-- **Transcoding Service (Go)**:
-  - Handles video transcoding to different formats and resolutions.
-  - REST API for managing transcoding jobs.
-  - Optimized for high-performance processing.
+- **Monitoring and Maintenance**:
+  - Logging and monitoring tools integrated for both Python and R, tracking model performance and operational metrics.
+  - CI/CD integration with Jenkins and GitHub Actions, supporting continuous deployment and monitoring for both Python and R components.
 
-- **API Gateway (Kotlin with Spring Boot)**:
-  - Centralized entry point for all client requests.
-  - Load balancing and routing to appropriate backend services.
-  - Configurable routing rules and security settings.
+- **Utilities and Helpers**:
+  - Python helper functions for loading, preprocessing, and visualizing time-series data.
+  - R utilities for additional statistical processing and creating detailed, publication-ready visualizations.
 
-- **Event Handling (Scala with Kafka)**:
-  - Manages communication between services using an event-driven architecture.
-  - Kafka-based event bus for high-throughput message handling.
-  - Ensures eventual consistency and resilience across microservices.
-
-- **CQRS and Hexagonal Architecture**:
-  - Command and Query Responsibility Segregation (CQRS) pattern implemented in video services.
-  - Commands handled by Kotlin-based services and queries managed by Go-based services.
-  - Separation of concerns for scalability and maintainability.
-
-- **Frontend (React with JavaScript)**:
-  - Responsive web interface for browsing and watching videos.
-  - Integrated with Redux for state management.
-  - API services for interacting with backend microservices.
-
-- **Mobile Applications**:
-  - **Android App (Kotlin)**: Native Android application with user authentication, video playback, and offline capabilities.
-  - **iOS App (Swift)**: Native iOS application with a similar feature set as the Android app.
-
-- **DevOps and CI/CD**:
-  - Dockerized services for consistent and scalable deployments.
-  - GitHub Actions for continuous integration and deployment.
-  - Deployment scripts for automating the setup of services.
+- **Testing**:
+  - Comprehensive unit and integration tests for Python and R components to ensure robustness and reliability.
+  - Automated testing workflows integrated with CI/CD pipelines to maintain high code quality.
 
 - **Documentation**:
-  - Detailed system architecture documentation.
-  - API documentation for all microservices.
-  - Change log and contribution guidelines.
+  - Detailed documentation covering model architectures, data pipelines, deployment guides, and API usage.
+  - Specific guides on integrating Python and R, explaining the use of each language within the project.
 
 ## Directory Structure
 ```bash
-### Root Directory
+Root Directory
 ├── README.md
 ├── LICENSE
 ├── .gitignore
-├── package.json
-
-### Backend Services (Microservices)
-
-#### **UserService/** (Kotlin with Spring Boot)
-├── src/
-│   ├── domain/
-│   │   ├── User.kt
-│   ├── controllers/
-│   │   ├── UserController.kt
-│   ├── services/
-│   │   ├── UserService.kt
-│   ├── repositories/
-│   │   ├── UserRepository.kt
-│   ├── Dockerfile
-│   ├── application.yml
-
-#### **VideoService/** (Java with Spring Boot)
-├── src/
-│   ├── domain/
-│   │   ├── Video.java
-│   ├── controllers/
-│   │   ├── VideoController.java
-│   ├── services/
-│   │   ├── VideoService.java
-│   ├── repositories/
-│   │   ├── VideoRepository.java
-│   ├── Dockerfile
-│   ├── application.yml
-
-#### **RecommendationService/** (Python with Flask)
-├── src/
-│   ├── domain/
-│   │   ├── recommendation.py
-│   ├── controllers/
-│   │   ├── recommendation_controller.py
-│   ├── services/
-│   │   ├── recommendation_service.py
-│   ├── repositories/
-│   │   ├── recommendation_repository.py
-│   ├── Dockerfile
-│   ├── config.py
-
-#### **AnalyticsService/** (Scala with Akka HTTP)
-├── src/
-│   ├── domain/
-│   │   ├── Analytics.scala
-│   ├── controllers/
-│   │   ├── AnalyticsController.scala
-│   ├── services/
-│   │   ├── AnalyticsService.scala
-│   ├── repositories/
-│   │   ├── AnalyticsRepository.scala
-│   ├── Dockerfile
-│   ├── application.conf
-
-#### **TranscodingService/** (Go)
-├── src/
-│   ├── domain/
-│   │   ├── transcoding.go
-│   ├── controllers/
-│   │   ├── transcoding_controller.go
-│   ├── services/
-│   │   ├── transcoding_service.go
-│   ├── repositories/
-│   │   ├── transcoding_repository.go
-│   ├── Dockerfile
-│   ├── config.yaml
-
-#### **Gateway/** (Kotlin with Spring Boot)
-├── src/
-│   ├── GatewayApplication.kt
-│   ├── Dockerfile
-│   ├── application.yml
-
-### Event Handling (Event-Driven Architecture)
-
-#### **EventBus/** (Scala with Kafka)
-├── src/
-│   ├── producers/
-│   │   ├── UserActionProducer.scala
-│   ├── consumers/
-│   │   ├── RecommendationConsumer.scala
-│   ├── Dockerfile
-│   ├── application.conf
-
-### CQRS and Hexagonal Architecture
-
-#### **VideoCommandService/** (Kotlin with Spring Boot)
-├── src/
-│   ├── commands/
-│   │   ├── AddVideoCommand.kt
-│   ├── controllers/
-│   │   ├── VideoCommandController.kt
-│   ├── services/
-│   │   ├── VideoCommandService.kt
-│   ├── repositories/
-│   │   ├── VideoCommandRepository.kt
-│   ├── Dockerfile
-│   ├── application.yml
-
-#### **VideoQueryService/** (Go)
-├── src/
-│   ├── queries/
-│   │   ├── fetch_video_query.go
-│   ├── controllers/
-│   │   ├── video_query_controller.go
-│   ├── services/
-│   │   ├── video_query_service.go
-│   ├── repositories/
-│   │   ├── video_query_repository.go
-│   ├── Dockerfile
-│   ├── config.yaml
-
-### Frontend
-
-#### **React Frontend** (JavaScript)
-├── public/
-│   ├── index.html
-├── src/
-│   ├── components/
-│   │   ├── VideoPlayer.js
-│   │   ├── RecommendationList.js
-│   ├── redux/
-│   │   ├── store.js
-│   │   ├── reducers.js
-│   ├── services/
-│   │   ├── api.js
-│   ├── App.js
-│   ├── index.js
-├── package.json
-
-### Mobile
-
-#### **Android App** (Kotlin)
-├── android/
-│   ├── src/
-│   │   ├── main/
-│   │   │   ├── MainActivity.kt
-│   ├── java/com/netflixclone/app/
-│   │   ├── UserServiceClient.kt
-│   │   ├── VideoServiceClient.kt
-│   ├── build.gradle
-
-#### **iOS App** (Swift)
-├── ios/
-│   ├── src/
-│   │   ├── AppDelegate.swift
-│   ├── Podfile
-
-### DevOps
-
-#### **DevOps Tools and Configuration**
-├── docker/
-│   ├── Dockerfile_UserService
-│   ├── Dockerfile_VideoService
-│   ├── Dockerfile_RecommendationService
-│   ├── Dockerfile_AnalyticsService
-│   ├── Dockerfile_TranscodingService
-├── .github/workflows/
-│   ├── ci_cd_pipeline.yml
-├── scripts/
-│   ├── deploy.sh
-
-### Documentation
-
-#### **Documentation Files**
+├── data/
+│   ├── raw/
+│   ├── processed/
+│   ├── features/
+│   ├── scripts/
+│       ├── preprocess.py
+│       ├── preprocess.R
+│       ├── feature_engineering.py
+│       ├── eda.Rmd
+│       ├── split.py
+├── models/
+│   ├── traditional/
+│       ├── arima.py
+│       ├── r_models.R
+│       ├── random_forest.py
+│   ├── deep_learning/
+│       ├── lstm.py
+│       ├── autoencoder.py
+│   ├── unsupervised/
+│       ├── isolation_forest.py
+│       ├── dbscan.py
+│   ├── ensemble/
+│       ├── ensemble_model.py
+│   ├── train.py
+│   ├── evaluate.py
+│   ├── evaluate.R
+│   ├── inference.py
+├── experiments/
+│   ├── configs/
+│   ├── scripts/
+│       ├── run_experiment.py
+│       ├── tune_hyperparameters.py
+│       ├── r_experiment.R
+├── deployment/
+│   ├── docker/
+│       ├── Dockerfile
+│       ├── docker-compose.yml
+│   ├── scripts/
+│       ├── deploy_aws.py
+│       ├── deploy_gcp.py
+│   ├── api/
+│       ├── app.py
+│       ├── app.R
+│       ├── routes.py
+│       ├── requirements.txt
+│       ├── packages.R
+├── monitoring/
+│   ├── logging/
+│       ├── logger.py
+│       ├── logger.R
+│   ├── metrics/
+│       ├── monitor.py
+│       ├── monitor.R
+│   ├── mlops/
+│       ├── jenkinsfile
+│       ├── github_actions.yml
+├── utils/
+│   ├── data_loader.py
+│   ├── visualization.py
+│   ├── visualization.R
+│   ├── metrics.py
+│   ├── metrics.R
+│   ├── time_series_utils.py
+├── tests/
+│   ├── test_models.py
+│   ├── test_models.R
+│   ├── test_data_pipeline.py
+│   ├── test_api.py
 ├── docs/
-│   ├── system_architecture.md
-│   ├── api_documentation.md
-├── CHANGELOG.md
-
-### Configurations
-
-#### **Configuration Files**
-├── .eslintrc
-├── .prettierrc
-├── .babelrc
+│   ├── model_architectures.md
+│   ├── data_pipeline.md
+│   ├── deployment_guide.md
+│   ├── api_usage.md
+│   ├── anomaly_detection_strategies.md
+├── configs/
+│   ├── config.yaml
+├── .github/
+│   ├── workflows/
+│       ├── ci.yml
+│       ├── cd.yml
+├── scripts/
+│   ├── clean_data.py
+│   ├── generate_reports.py
+│   ├── generate_reports.R
